@@ -1,7 +1,10 @@
 from fastapi import APIRouter
 
+from db.query import getHello
+
 router = APIRouter()
 
 @router.get("/hello")
 def hello():
-    return {"message": "Hello World"}
+    res = getHello()
+    return res

@@ -15,3 +15,10 @@ class Hello(Base):
 
     def __repr__(self):
         return f'<Hello {self.message}>'
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'message': self.message,
+            'created_at': self.created_at
+        }
