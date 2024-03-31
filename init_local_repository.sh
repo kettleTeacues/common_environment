@@ -39,3 +39,21 @@ rm -rf .git
 git init
 git add .
 git commit -m "first commit"
+
+# .envファイルを作成
+touch .env
+echo "POSTGRES_USERNAME"="postgres" >> .env
+echo "POSTGRES_PASSWORD"="postgres" >> .env
+echo "POSTGRES_HOST"="localhost" >> .env
+echo "POSTGRES_PORT"="5432" >> .env
+echo "POSTGRES_DB_NAME"="postgres" >> .env
+
+# venvを作成
+cd ..
+python3 -m venv venv
+source venv/bin/activate
+pip install -r $new_dir/containers/backend/requirements.txt
+
+# yarnをインストール
+cd "$new_dir/containers/frontend"
+yarn install
