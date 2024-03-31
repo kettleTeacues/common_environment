@@ -26,6 +26,7 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('message', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('timezone', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -33,13 +34,14 @@ def upgrade() -> None:
     op.execute(
         sa.text(
             """
-            INSERT INTO hello (id, message, created_at)
-            VALUES (:id, :message, :created_at)
+            INSERT INTO hello (id, message, created_at, timezone)
+            VALUES (:id, :message, :created_at, :timezone)
             """
         ).bindparams(
             sa.bindparam("id", 1),
             sa.bindparam("message", "Hello, World!"),
-            sa.bindparam("created_at", datetime.now(timezone('asia/tokyo')))
+            sa.bindparam("created_at", datetime.now(timezone('Asia/Tokyo'))),
+            sa.bindparam("timezone", "Asia/Tokyo")
         )
     )
 
